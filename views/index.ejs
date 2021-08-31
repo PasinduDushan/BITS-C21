@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Welcome User</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Movies</a>
+      </div>
+    </nav>    
+    <br>
+    <u><center><h1>Welcome User</h1></center></u><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <ul><li><h3>Make sure you're adding a landscape image for the movie image for a better quality and a better view.</h3></li></ul><br>
+    <% if(data.length === 0){ %>
+      <center><h3>There are no movies at this time. Check back later</h3></center>
+      <% } else{ %>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% data.forEach(function(movie) { %>
+         <div class="col">
+          <div class="card">
+           <img src="<%= movie.image %>" class="card-img-top" alt="..." height="200" width="200">
+            <div class="card-body">
+            <h5 class="card-title"><%= movie.name %></h5>
+            <p class="card-text"><%= movie.description %></p><br>
+            <p class="card-text"><%= movie.ranking %> liked this film</p>
+           </div>
+          </div>
+         </div>
+    <% }); %><br>
+  </div>
+  <% } %>
+ <br>
+  <center><form id="mainform"class="needs-validation" method="POST" action="/addmovie/success" novalidate>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Movie Name</label>
+      <input type="text" class="form-control" name="name" id="validationCustom01" placeholder="Captain America Civil War" required>
+      <div class="invalid-feedback">
+        You must type a name
+      </div>
+    </div><br>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Movie description</label>
+      <input type="text" class="form-control" name="description" id="validationCustom01" placeholder="It's a cool movie" maxlength="300" required>
+      <div class="invalid-feedback">
+        You must type a description
+      </div>
+    </div><br>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Image for the movie</label>
+      <input type="text" class="form-control" name="image" id="validationCustom01" placeholder="https://movieimage.png" required>
+      <div class="invalid-feedback">
+        You must give us a URL
+      </div>
+    </div><br>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Movie ranking</label>
+      <input type="text" class="form-control" name="ranking" id="validationCustom01" placeholder="85%" maxlength="25" required>
+      <div class="invalid-feedback">
+        You must give us the ranking of this movie
+      </div>
+    </div><br>
+    <div class="col-12" style="display: flex; justify-content: center;">
+      <button type="submit" class="btn btn-primary">Add movie</button>
+    </div><br>
+  </form>
+ </center>
+  </body>
+</html>
+
+<style>
+  body{
+    background-color: #5D6D7E;
+  }
+</style>
+
+<script>
+(function () {
+'use strict'
+
+var forms = document.querySelectorAll('.needs-validation')
+
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
